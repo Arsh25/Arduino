@@ -6,7 +6,8 @@
    (RGB LED's used were bought as part of the makershed ultimate arduino
    microcontrller kit)
 */
-int grd;
+unsigned int grd; // references simulated ground pin
+unsigned long delay_time; // random time between colors
 
 void setup()
 {
@@ -21,14 +22,21 @@ void setup()
 void loop()
 {
   
-    grd = random(2,5);
+    grd = random(2,5); // set ground to a random int b/w 2 and 5
+    delay_time = random(0,2500); // delay between color changes will be between 0 and 2.5 seconds 
+    
+    /* uncomment if statement below to prevent grd being set as pin5
+    and thus preventing a possible time period when the LED is off
+    /*
+    
     /*if(grd == 5)
     {
       grd = random(2,5);
     }*/
-    digitalWrite(8, HIGH);
-    digitalWrite(grd, LOW);
-    delay(1000);
+    
+    digitalWrite(8, HIGH); // set digital pin 8 as high. connected to common anode (longest pin)
+    digitalWrite(grd, LOW);// set grd tow low, to simulate circuit ground
+    delay(delay_time);
     digitalWrite(8, LOW);
     digitalWrite(grd, HIGH);
   
